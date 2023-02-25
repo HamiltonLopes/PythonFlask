@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Welcome {{ session['username']|default('')|capitalize }}</h1>
+        <ul class="list-group mt-4">
+			<li class="list-group-item"><a href="{{ url_for('calculator_route') }}">Calculator</a></li>
+			{% if 'username' in session %}
+				<li class="list-group-item"><a href="{{ url_for('users_route') }}">Users</a></li>
+			{% endif %}
+        </ul>
+			{% if 'username' not in session %}
+				<a class="mt-4 btn btn-primary" href="{{ url_for('login_route') }}">Login</a>
+				<a class="mt-4 btn btn-primary" href="{{ url_for('register_route') }}">Register</a>
+			{% else %}
+				<form class="mt-4" method="post" action="{{ url_for('clear_session') }}">
+					<button type="submit" class="btn btn-danger">Logout</button>
+				</form>
+        	{% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

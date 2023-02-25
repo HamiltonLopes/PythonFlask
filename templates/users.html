@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Users</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center">Users</h1>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Edit</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for username, user_info in users.items() %}
+          <tr>
+            <td>{{ username }}</td>
+            <td>{{ user_info['email'] }}</td>
+            <td>{{ user_info['password'] }}</td>
+            <td>
+              <a class="btn btn-link" href="{{ url_for('edit_user', username=username) }}">
+                <i class="fas fa-edit"></i>
+              </a>
+            </td>
+            <td>
+              <form method="post" action="{{ url_for('remove_user', username=username) }}" onsubmit="return confirm('Are you sure you want to remove this user?');">
+                <button type="submit" class="btn btn-link">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a href="{{ url_for('index') }}" class="btn btn-primary">Back</a>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/80dc6095a0.js" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+# Arquivos de build do Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Arquivos de ambiente virtual
+venv/
+env/
+
+# Arquivos gerados pelo sistema operacional
+.DS_Store
+Thumbs.db
